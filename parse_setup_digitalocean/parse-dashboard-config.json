@@ -1,0 +1,12 @@
+{
+	"apps": [{
+		"serverURL": "http://domain:1337/parse",
+		"appId": "appid",
+		"masterKey": "masterid",
+		"appName": "MyApp"
+	}],
+	"users": [{
+		"user": "user",
+		"pass": "pass"
+	}]
+}
