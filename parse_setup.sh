@@ -1,6 +1,8 @@
 # Instructions
-# Run wget https://www.dropbox.com/s/h2pfqj0tihcv4kv/parse_setup_digitalocean
-# Run sh parse_setup_digitalocean/parseMongo.sh
+# sudo apt-get update
+# sudo apt-get install git -y
+# git clone https://github.com/prodigy2m/parse-full-server-setup-digitalocean.git
+# sh parse-full-server-setup-digitalocean/parse-setup.sh
 # Done
 
 # Start updating server to up-to-date
@@ -11,7 +13,7 @@ echo "------------------------------------------------------------------"
 
 echo "------------------------------------------------------------------"
 echo "####################### REQUIREMENTS  ############################"
-echo " ---- DOMAIN NAME	- DIGITAL OCEAN ACCOUNT - At least $5 Plan -----"
+echo " ---- DOMAIN NAME - DIGITAL OCEAN ACCOUNT - At least $5 Plan -----"
 echo "------------------------------------------------------------------"
 
 echo "------------------------------------------------------------------"
@@ -34,7 +36,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			echo "------------------------------------------------------------------"
 			echo "This section is for creating SWAP memory for smallest servers in DigitalOcean"
 
-			echo -p "Are you using smallest plaN? (y/n)? "
+			echo -p "Are you using the CHEAPEST DigitalOcean Plan? (y/n)? "
 				read choice
 				case $choice in
 					y)	
@@ -56,9 +58,9 @@ echo -p "Do you have everything you need to start? (y/n)?"
 
 			sleep 2
 
-			echo "- Installing GIThub. -"
-			sleep 1
-			sudo apt-get -y install git bc
+			# echo "- Installing GIThub. -"
+			# sleep 1
+			# sudo apt-get -y install git bc
 
 			echo "- Installing Node Essential. -"
 			sleep 1
@@ -91,12 +93,15 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			sudo apt-get -y install mongodb-org
 			service mongod status
 
+			echo " ############### MONGO STATUS #################"
+			sleep 5
+
 			echo "- Porting NGINX and MongoDb SSL Licence. -"
 			sleep 1
-			sudo cat /etc/letsencrypt/archive/ioo.li/{fullchain1.pem,privkey1.pem} | sudo tee /etc/ssl/mongo.pem
+			sudo cat /etc/letsencrypt/archive/$input/{fullchain1.pem,privkey1.pem} | sudo tee /etc/ssl/mongo.pem
 			sudo chown mongodb:mongodb /etc/ssl/mongo.pem
 			sudo chmod 600 /etc/ssl/mongo.pem
-			mongo --port 27017
+			# mongo --port 27017
 
 			echo "- Starting NGINX. -"
 			sleep 1
@@ -110,7 +115,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 
 			echo "- Installing Parse Dashboard -"
 			sleep 1	
-			cd ~/parse-server-example
+			cd ~/root/parse-server-example
 			cd ..
 			git clone https://github.com/ParsePlatform/parse-dashboard.git
 			cd parse-dashboard
@@ -118,7 +123,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 
 			echo "- Installing Forever for Running Production -"
 			sleep 1			
-			sudo apt-get -Y install forever
+			sudo apt-get -y install forever
 
 
 			echo " ########### CONGFIGURATION PROCESS #############"
@@ -163,7 +168,6 @@ echo -p "Do you have everything you need to start? (y/n)?"
 				-d '{"score":1337,"playerName":"Sammy","cheatMode":false}' \
 				http://$input:1337/parse/classes/GameScore
 
-			echo
 			sleep 2
 
 			# Creating new user name and password for Parse Dashboard Login. 
