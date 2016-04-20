@@ -1,6 +1,6 @@
 # Instructions
 # sudo apt-get update
-# sudo apt-get install git -y
+# sudo apt-get -y install git bc
 # git clone https://github.com/prodigy2m/parse-full-server-setup-digitalocean.git
 # sh parse-full-server-setup-digitalocean/parse-setup.sh
 # Done
@@ -64,6 +64,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 
 			echo "- Installing Node Essential. -"
 			sleep 1
+			cd ~
 			curl -sL https://deb.nodesource.com/setup_5.x -o nodesource_setup.sh
 			sudo -E bash ./nodesource_setup.sh
 			sudo apt-get -y install nodejs build-essential git
@@ -71,8 +72,6 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			echo "- Installing Express. -"
 			sleep 1
 			npm install -g express
-			# SOME ISSUE HERE
-			~/.nvm/node_version/lib/node_modules/package_name
 			npm link express
 
 			echo "- Installing NGINX Server. -"
@@ -84,12 +83,6 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			sleep 1
 			sudo npm install ws
 
-			echo "- Installing SSL Licence. -"
-			sleep 1
-			sudo git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
-			cd /opt/letsencrypt
-			./letsencrypt-auto certonly --standalone
-
 			echo "- Installing MongoDb Org. -"
 			sleep 1
 			sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
@@ -98,7 +91,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			sudo apt-get -y install mongodb-org
 			service mongod status
 
-			echo " ############### MONGO STATUS #################"
+			echo " ############### PARSE INSTALL #################"
 			sleep 5
 
 			echo "- Installing Parse Server (Example) -"
@@ -109,7 +102,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 
 			echo "- Installing Parse Dashboard -"
 			sleep 1	
-			cd ~/parse-server-example
+			# cd ~/parse-server-example
 			cd ..
 			git clone https://github.com/ParsePlatform/parse-dashboard.git
 			cd parse-dashboard
@@ -118,6 +111,15 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			echo "- Installing Forever for Running Production -"
 			sleep 1			
 			npm install forever -g
+
+			echo " ############### SSL INSTALL #################"
+			sleep 2
+
+			echo "- Installing SSL Licence. -"
+			sleep 1
+			sudo git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
+			cd /opt/letsencrypt
+			./letsencrypt-auto certonly --standalone
 
 
 			echo " ########### CONGFIGURATION PROCESS #############"
@@ -137,17 +139,18 @@ echo -p "Do you have everything you need to start? (y/n)?"
 					sed 's/domain/'"$input"'/g' /root/parse-full-server-setup-digitalocean/default_sample > /etc/nginx/sites-available/default
 					echo "Your SSH for nginx is all setup and done."
 					sleep 2
+					
+					echo "- Porting NGINX and MongoDb SSL Licence. -"
+					sleep 2
+					sudo cat /etc/letsencrypt/archive/$input/{fullchain1.pem,privkey1.pem} | sudo tee /etc/ssl/mongo.pem
+					sudo chown mongodb:mongodb /etc/ssl/mongo.pem
+					sudo chmod 600 /etc/ssl/mongo.pem
+
 				;;
 				n)
 				  echo "Please assign a DOMAIN name for this server to work and re-run this script again";
 				;;
 			esac
-
-			echo "- Porting NGINX and MongoDb SSL Licence. -"
-			sleep 1
-			sudo cat /etc/letsencrypt/archive/$input/{fullchain1.pem,privkey1.pem} | sudo tee /etc/ssl/mongo.pem
-			sudo chown mongodb:mongodb /etc/ssl/mongo.pem
-			sudo chmod 600 /etc/ssl/mongo.pem
 
 			echo "- Starting NGINX. -"
 			sleep 1
