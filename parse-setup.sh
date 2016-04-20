@@ -108,9 +108,10 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			cd parse-dashboard
 			npm install -g parse-dashboard
 
-			echo "- Installing Forever for Running Production -"
+			echo "- Installing Forever and Forever-Service for Running Production -"
 			sleep 1			
-			npm install forever -g
+			npm install -g forever
+			npm install -g forever-service
 
 			echo " ############### SSL INSTALL #################"
 			sleep 2
@@ -175,14 +176,6 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			NEW_ID_MASTER=$(cat /dev/urandom | tr -dc "a-zA-Z0-9" | fold -w 20 | head -n 1)
 			NEW_ID_CLIENT=$(cat /dev/urandom | tr -dc "a-zA-Z0-9" | fold -w 20 | head -n 1)
 
-			echo "- Creating First MongoDb Entry -"
-			sleep 2			
-			curl -X POST \
-				-H "X-Parse-Application-Id: $NEW_ID_CLIENT" \
-				-H "Content-Type: application/json" \
-				-d '{"score":1337,"playerName":"Sammy","cheatMode":false}' \
-				http://$input:1337/parse/classes/GameScore
-
 			sleep 2
 
 			# Creating new user name and password for Parse Dashboard Login. 
@@ -199,6 +192,14 @@ echo -p "Do you have everything you need to start? (y/n)?"
 
 			# Embed new Generated ID's to Index.js file for Parse Server
 			sed 's/masterid/'"$NEW_ID_MASTER"'/g; s/appid/'"$NEW_ID_CLIENT"'/g' /root/parse-full-server-setup-digitalocean/parse_app_setup.js > /root/parse-server-example/index.js
+
+			echo "- Creating First MongoDb Entry -"
+			sleep 2			
+			curl -X POST \
+				-H "X-Parse-Application-Id: $NEW_ID_CLIENT" \
+				-H "Content-Type: application/json" \
+				-d '{"score":1337,"playerName":"Sammy","cheatMode":false}' \
+				http://$input:1337/parse/classes/GameScore
 
 			echo "------------------------------------------------------------------"
 			echo "$############# IMPORTANT - WRITE THIS DOWN  ######################"
