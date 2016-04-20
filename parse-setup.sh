@@ -159,8 +159,8 @@ echo -p "Do you have everything you need to start? (y/n)?"
 
 			echo "- Configuring Autostart for Parse Server & Livequery & Parse Dashboard -"
 			sleep 2			
-			echo -en "start on startup\nexec forever start /root/parse-server-example/index.js" > /etc/init/parse.conf
-			echo -en "start on startup\nexec forever start /root/parse-dashboard/Parse-Dashboard/index.js --allowInsecureHTTP true" > /etc/init/parse-dashboard.conf
+			echo "start on startup\nexec forever start /root/parse-server-example/index.js" > /etc/init/parse.conf
+			echo "start on startup\nexec forever start /root/parse-dashboard/Parse-Dashboard/index.js --allowInsecureHTTP true" > /etc/init/parse-dashboard.conf
 
 			echo "- Generating Unique Master & Client Keys -"
 			sleep 2
