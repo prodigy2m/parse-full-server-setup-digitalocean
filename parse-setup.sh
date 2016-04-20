@@ -2,7 +2,7 @@
 # sudo apt-get update
 # sudo apt-get install git -y
 # git clone https://github.com/prodigy2m/parse-full-server-setup-digitalocean.git
-# sh parse-full-server-setup-digitalocean/parse_setup.sh
+# sh parse-full-server-setup-digitalocean/parse-setup.sh
 # Done
 
 # Start updating server to up-to-date
@@ -98,9 +98,10 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			sleep 5
 
 			echo "- Installing Parse Server (Example) -"
-			sleep 1			
+			sleep 1
+			cd /root			
 			git clone https://github.com/ParsePlatform/parse-server-example.git
-			cd ~/parse-server-example
+			cd /parse-server-example
 			npm install
 
 			echo "- Installing Parse Dashboard -"
