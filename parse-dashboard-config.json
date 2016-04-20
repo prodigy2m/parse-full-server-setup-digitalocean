@@ -6,7 +6,7 @@
 		"appName": "MyApp"
 	}],
 	"users": [{
-		"user": "user",
-		"pass": "pass"
+		"user": "user-sample",
+		"pass": "pass-sample"
 	}]
 }
