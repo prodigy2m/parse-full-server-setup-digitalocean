@@ -80,6 +80,10 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			sudo apt-get -y install nginx
 			sudo service nginx stop
 
+			echo "Installing WS dependency"
+			sleep 1
+			sudo npm install ws
+
 			echo "- Installing SSL Licence. -"
 			sleep 1
 			sudo git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
@@ -98,10 +102,9 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			sleep 5
 
 			echo "- Installing Parse Server (Example) -"
-			sleep 1
-			cd /root			
+			sleep 1			
 			git clone https://github.com/ParsePlatform/parse-server-example.git
-			cd /parse-server-example
+			cd /root/parse-server-example/
 			npm install
 
 			echo "- Installing Parse Dashboard -"
@@ -114,7 +117,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 
 			echo "- Installing Forever for Running Production -"
 			sleep 1			
-			sudo apt-get -y install forever
+			npm install forever -g
 
 
 			echo " ########### CONGFIGURATION PROCESS #############"
