@@ -131,7 +131,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 						read input
 
 					domain=$input
-					sed 's/domain/'"$input"'/g' default_sample > /etc/nginx/sites-available/default
+					sed 's/domain/'"$input"'/g' /root/parse-full-server-setup-digitalocean/default_sample > /etc/nginx/sites-available/default
 					echo "Your SSH for nginx is all setup and done."
 					sleep 2
 				;;
@@ -182,10 +182,10 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			echo "Parse Password (Case sensative):  "
 			read pass
 			sleep 1
-			sed 's/masterid/'"$NEW_ID_MASTER"'/g; s/appid/'"$NEW_ID_CLIENT"'/g; s/domain/'"$input"'/g; s/user/'"$user"'/g; s/pass/'"$pass"'/g' parse-dashboard-config.json > /root/parse-dashboard/Parse-Dashboard/parse-dashboard-config.json
+			sed 's/masterid/'"$NEW_ID_MASTER"'/g; s/appid/'"$NEW_ID_CLIENT"'/g; s/domain/'"$input"'/g; s/user/'"$user"'/g; s/pass/'"$pass"'/g' /root/parse-full-server-setup-digitalocean/parse-dashboard-config.json > /root/parse-dashboard/Parse-Dashboard/parse-dashboard-config.json
 
 			# Embed new Generated ID's to Index.js file for Parse Server
-			sed 's/masterid/'"$NEW_ID_MASTER"'/g; s/appid/'"$NEW_ID_CLIENT"'/g' parse_app_setup.js > /root/parse-server-example/index.js
+			sed 's/masterid/'"$NEW_ID_MASTER"'/g; s/appid/'"$NEW_ID_CLIENT"'/g' /root/parse-full-server-setup-digitalocean/parse_app_setup.js > /root/parse-server-example/index.js
 
 			echo "------------------------------------------------------------------"
 			echo "$############# IMPORTANT - WRITE THIS DOWN  ######################"
