@@ -2,7 +2,7 @@
 # sudo apt-get update
 # sudo apt-get install git -y
 # git clone https://github.com/prodigy2m/parse-full-server-setup-digitalocean.git
-# sh parse-full-server-setup-digitalocean/parse-setup.sh
+# sh parse-full-server-setup-digitalocean/parse_setup.sh
 # Done
 
 # Start updating server to up-to-date
@@ -35,8 +35,8 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			echo "######################### SWAP SETUP $5 Server  ##################"
 			echo "------------------------------------------------------------------"
 			echo "This section is for creating SWAP memory for smallest servers in DigitalOcean"
-
-			echo -p "Are you using the CHEAPEST DigitalOcean Plan? (y/n)? "
+			echo ""
+			echo "Are you using the CHEAPEST DigitalOcean Plan? (y/n)? "
 				read choice
 				case $choice in
 					y)	
@@ -100,12 +100,12 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			echo "- Installing Parse Server (Example) -"
 			sleep 1			
 			git clone https://github.com/ParsePlatform/parse-server-example.git
-			cd parse-server-example
+			cd ~/parse-server-example
 			npm install
 
 			echo "- Installing Parse Dashboard -"
 			sleep 1	
-			cd /root/parse-server-example
+			cd ~/parse-server-example
 			cd ..
 			git clone https://github.com/ParsePlatform/parse-dashboard.git
 			cd parse-dashboard
