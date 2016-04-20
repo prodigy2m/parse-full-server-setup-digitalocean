@@ -29,7 +29,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 
 			clear
 			sudo apt-get -y upgrade
-			sudo apt-get -y update
+			# sudo apt-get -y update
 
 			echo "------------------------------------------------------------------"
 			echo "######################### SWAP SETUP $5 Server  ##################"
@@ -71,6 +71,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			echo "- Installing Express. -"
 			sleep 1
 			npm install -g express
+			# SOME ISSUE HERE
 			~/.nvm/node_version/lib/node_modules/package_name
 			npm link express
 
@@ -96,17 +97,6 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			echo " ############### MONGO STATUS #################"
 			sleep 5
 
-			echo "- Porting NGINX and MongoDb SSL Licence. -"
-			sleep 1
-			sudo cat /etc/letsencrypt/archive/$input/{fullchain1.pem,privkey1.pem} | sudo tee /etc/ssl/mongo.pem
-			sudo chown mongodb:mongodb /etc/ssl/mongo.pem
-			sudo chmod 600 /etc/ssl/mongo.pem
-			# mongo --port 27017
-
-			echo "- Starting NGINX. -"
-			sleep 1
-			sudo service nginx restart
-
 			echo "- Installing Parse Server (Example) -"
 			sleep 1			
 			git clone https://github.com/ParsePlatform/parse-server-example.git
@@ -115,7 +105,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 
 			echo "- Installing Parse Dashboard -"
 			sleep 1	
-			cd ~/root/parse-server-example
+			cd /root/parse-server-example
 			cd ..
 			git clone https://github.com/ParsePlatform/parse-dashboard.git
 			cd parse-dashboard
@@ -141,13 +131,24 @@ echo -p "Do you have everything you need to start? (y/n)?"
 
 					domain=$input
 					sed 's/domain/'"$input"'/g' default_sample > /etc/nginx/sites-available/default
-					service nginx restart
 					echo "Your SSH for nginx is all setup and done."
+					sleep 2
 				;;
 				n)
 				  echo "Please assign a DOMAIN name for this server to work and re-run this script again";
 				;;
-			esac			
+			esac
+
+			echo "- Porting NGINX and MongoDb SSL Licence. -"
+			sleep 1
+			sudo cat /etc/letsencrypt/archive/$input/{fullchain1.pem,privkey1.pem} | sudo tee /etc/ssl/mongo.pem
+			sudo chown mongodb:mongodb /etc/ssl/mongo.pem
+			sudo chmod 600 /etc/ssl/mongo.pem
+
+			echo "- Starting NGINX. -"
+			sleep 1
+			sudo service nginx restart
+
 
 			echo "- Configuring Autostart for Parse Server & Livequery & Parse Dashboard -"
 			sleep 2			
