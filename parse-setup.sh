@@ -199,7 +199,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 				-H "X-Parse-Application-Id: $NEW_ID_CLIENT" \
 				-H "Content-Type: application/json" \
 				-d '{"score":1337,"playerName":"Sammy","cheatMode":false}' \
-				http://$input:1337/parse/classes/GameScore
+				http://localhost:1337/parse/classes/GameScore
 
 			echo "------------------------------------------------------------------"
 			echo "$############# IMPORTANT - WRITE THIS DOWN  ######################"
