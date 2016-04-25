@@ -22,6 +22,14 @@ git clone https://github.com/prodigy2m/parse-full-server-setup-digitalocean.git
 sh parse-full-server-setup-digitalocean/parse-setup.sh
 ```
 
+### What you get with this install
+- Parse Server
+- Parse Dashboard
+- Mongo Db
+- NGINX (http server)
+- SSL License
+- HTTPS Access
+
 You will be asked couple questions along the way. Please answer truthfully :). Once you are through, you will be asked to restart the server. Once restarted, you are all DONE.
 
 
