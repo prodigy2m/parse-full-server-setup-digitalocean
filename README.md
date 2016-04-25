@@ -1,6 +1,10 @@
 # Digital Ocean - Parse Server Setup Automation (Parse Server, Parse Dashboard, MongoDb, SSL license, HTTPS Access, NGINX HTTP Server) 
 
-## Digital Ocean + Parse Server = Go Prototype faster
+- Parse Server 
+-- Parse Details: https://parse.com/
+-- Parse GitHub: https://parseplatform.github.io/
+
+## Digital Ocean + Parse Server =  Go Prototype faster
 
 Works with smallest Digital Ocean plans. You need to follow the instructions. Simple steps.
 
