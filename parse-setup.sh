@@ -37,8 +37,8 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			echo "This section is for creating SWAP memory for smallest servers in DigitalOcean"
 			echo ""
 			echo "Are you using the CHEAPEST DigitalOcean Plan? (y/n)? "
-				read choice
-				case $choice in
+				read swap
+				case $swap in
 					y)	
 						echo "Creating SWAP memory"
 						sudo fallocate -l 4G /swapfile
@@ -58,10 +58,6 @@ echo -p "Do you have everything you need to start? (y/n)?"
 
 			sleep 2
 
-			# echo "- Installing GIThub. -"
-			# sleep 1
-			# sudo apt-get -y install git bc
-
 			echo "- Installing Node Essential. -"
 			sleep 1
 			cd ~
@@ -79,9 +75,9 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			sudo apt-get -y install nginx
 			sudo service nginx stop
 
-			echo "Installing WS dependency"
-			sleep 1
-			sudo npm install ws
+			# echo "Installing WS dependency"
+			# sleep 1
+			# sudo npm install ws
 
 			echo "- Installing MongoDb Org. -"
 			sleep 1
@@ -219,7 +215,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			echo -p "Do you have everything you need to start? (y/n)?"
 				read restart_this
 	
-				case $choice in
+				case $restart_this in
 					y)
 						echo "Rebooting now";
 						reboot
