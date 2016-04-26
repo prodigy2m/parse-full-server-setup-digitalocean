@@ -26,7 +26,7 @@ sh parse-full-server-setup-digitalocean/parse-setup.sh
 - Parse Server
 - Parse Dashboard
 - Mongo Db
-- NGINX (http server)
+- NGINX (web server) - Folder to access files /usr/share/nginx/www/"your-domain" 
 - SSL License
 - HTTPS Access
 
