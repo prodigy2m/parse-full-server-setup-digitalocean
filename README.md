@@ -1,8 +1,8 @@
 # Digital Ocean - Parse Server Setup Automation (Parse Server, Parse Dashboard, MongoDb, SSL license, HTTPS Access, NGINX HTTP Server) 
 
-- Parse Server 
--- Parse Details: https://parse.com/
--- Parse GitHub: https://parseplatform.github.io/
+###Parse Server 
+- Parse Details: https://parse.com/
+- Parse GitHub: https://parseplatform.github.io/
 
 ## Digital Ocean + Parse Server =  Creativity
 
