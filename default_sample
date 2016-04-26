@@ -21,7 +21,7 @@ server {
 	listen 80 default_server;
 	listen [::]:80 default_server ipv6only=on;
 
-	root html/domain/;
+	root /data/www;
 	index index.html index.htm;
 
 	# Make site accessible from http://localhost/
@@ -93,7 +93,7 @@ server {
 	listen 443;
 	server_name domain;
 #
-	root html;
+	root /data/www;
 	index index.html index.htm;
 
         ssl on;
