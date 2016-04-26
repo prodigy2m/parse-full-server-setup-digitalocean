@@ -34,6 +34,3 @@ You will be asked couple questions along the way. Please answer truthfully :). O
 
 
 NOTE: NOT RESPONSIBLE for this code at ALL. Install and use at your own risk.
-
-
-##Everything else works.
