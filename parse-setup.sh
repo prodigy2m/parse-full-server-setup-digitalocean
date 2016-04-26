@@ -139,9 +139,9 @@ echo -p "Do you have everything you need to start? (y/n)?"
 					
 					echo "- Porting NGINX and MongoDb SSL Licence. -"
 					sleep 2
-					sudo cat /etc/letsencrypt/archive/$domain/{fullchain1.pem,privkey1.pem} | sudo tee /etc/ssl/mongo.pem
-					sudo chown mongodb:mongodb /etc/ssl/mongo.pem
-					sudo chmod 600 /etc/ssl/mongo.pem
+					# Had to do it this way because dynamic domain didn't work in SH , had to export dynamic name to BASH
+					export domain
+					bash mongoSSL.sh
 
 				;;
 				n)
