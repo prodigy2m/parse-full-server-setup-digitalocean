@@ -4,7 +4,7 @@
 -- Parse Details: https://parse.com/
 -- Parse GitHub: https://parseplatform.github.io/
 
-## Digital Ocean + Parse Server =  Go Prototype faster
+## Digital Ocean + Parse Server =  Creativity
 
 Works with smallest Digital Ocean plans. You need to follow the instructions. Simple steps.
 
@@ -35,12 +35,5 @@ You will be asked couple questions along the way. Please answer truthfully :). O
 
 NOTE: NOT RESPONSIBLE for this code at ALL. Install and use at your own risk.
 
-
-###NOT WORKING: Dashboard. (Yet) - I don't know why forever-service doesn't want to start it. My other server works with same code but now it doesn't want to start.
-- You can start it by entering
-
-```
-parse-dashboard --config parse-server-config.json --allowInsecureHTTP true
-```
 
 ##Everything else works.
