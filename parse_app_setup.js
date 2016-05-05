@@ -53,7 +53,7 @@ app.get('/test', function(req, res) {
 
 var port = process.env.PORT || 1337;
 var httpsServer = require('https').createServer(ssl, app);
-httpServer.listen(port, function() {
+httpsServer.listen(port, function() {
     console.log('parse-server-example running with SSL on port ' + port + '.');
 });
 
