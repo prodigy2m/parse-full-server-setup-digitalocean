@@ -129,7 +129,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 
 				case $choice in
 				y)
-					echo "Enter your domain name (Without http, or www): "
+					echo "Enter your domain name (WITHOUT -> http/https): "
 						read input
 
 					domain=$input
