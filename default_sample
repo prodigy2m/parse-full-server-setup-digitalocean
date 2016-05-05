@@ -18,26 +18,24 @@
 ##
 
 server {
-	listen 80 default_server;
-	listen [::]:80 default_server ipv6only=on;
-
-	root /www/default_server;
-	index index.html index.htm;
+    listen 80;
+    listen [::]:80 default_server ipv6only=on;
+    return 301 https://$host$request_uri;
 
 	# Make site accessible from http://localhost/
-	server_name localhost;
+	#server_name localhost;
 
-	location / {
+	#location / {
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
+		#try_files $uri $uri/ =404;
 		# Uncomment to enable naxsi on this location
 		# include /etc/nginx/naxsi.rules
-	}
+	#}
 
 	# Only for nginx-naxsi used with nginx-naxsi-ui : process denied requests
 	#location /RequestDenied {
-	#	proxy_pass http://127.0.0.1:8080;    
+	#	proxy_pass http://127.0.0.1:8080;
 	#}
 
 	#error_page 404 /404.html;
@@ -92,7 +90,7 @@ server {
 server {
 	listen 443;
 	server_name domain;
-#
+
 	root /www/default_server;
 	index index.html index.htm;
 
@@ -105,6 +103,14 @@ server {
         ssl_prefer_server_ciphers on;
         ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
 
+		location / {
+			# First attempt to serve request as file, then
+			# as directory, then fall back to displaying a 404.
+			try_files $uri $uri/ =404;
+			# Uncomment to enable naxsi on this location
+			# include /etc/nginx/naxsi.rules
+		}
+
         location /parse/ {
                 proxy_set_header X-Real-IP $remote_addr;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -114,46 +120,29 @@ server {
                 proxy_set_header Host $http_host;
                 proxy_redirect off;
         }
-   	 location /ws/ {
-        	# switch off logging
-        	access_log off;
+		location /ws/ {
+				# switch off logging
+				access_log off;
 
-        	# redirect all HTTP traffic to localhost:1337
-       		proxy_pass http://localhost:1337;
-        	proxy_set_header X-Real-IP $remote_addr;
-        	proxy_set_header Host $host;
-        	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+				# redirect all HTTP traffic to localhost:1337
+					proxy_pass http://localhost:1337;
+				proxy_set_header X-Real-IP $remote_addr;
+				proxy_set_header Host $host;
+				proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
-        	# WebSocket support (nginx 1.4)
-        	proxy_http_version 1.1;
-        	proxy_set_header Upgrade $http_upgrade;
-        	proxy_set_header Connection "upgrade";
-    	}
+				# WebSocket support (nginx 1.4)
+				proxy_http_version 1.1;
+				proxy_set_header Upgrade $http_upgrade;
+				proxy_set_header Connection "upgrade";
+		}
 
         location /dashboard/ {
-        proxy_pass http://127.0.0.1:4040/;
+        		proxy_pass http://127.0.0.1:4040/;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection 'upgrade';
                 proxy_set_header Host $host;
                 proxy_cache_bypass $http_upgrade;
     	}
-# This is for Ajenti server dashboard
-#
-#		location ~ /ajenti.* {
-#				rewrite (/ajenti)$ / break;
-#				rewrite /ajenti/(.*) /$1 break;
-#				proxy_pass http://localhost:8000;
-#				proxy_redirect / /ajenti/;
-#				proxy_set_header Host $host;
-#				proxy_set_header Origin http://$host;
-#				proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-#				proxy_http_version 1.1;
-#				proxy_set_header Upgrade $http_upgrade;
-#				proxy_set_header Connection $http_connection;
-#		}
-                
-        location / {
-                try_files $uri $uri/ =404;
-        }
+
 }
