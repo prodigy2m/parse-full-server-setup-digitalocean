@@ -4,6 +4,12 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
+var fs = require('fs');
+var ssl = {
+    key: fs.readFileSync('/etc/letsencrypt/live/domain/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/domain/fullchain.pem'),
+    ca: fs.readFileSync('/etc/letsencrypt/live/domain/chain.pem')
+}
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGOLAB_URI;
 
@@ -16,7 +22,7 @@ var api = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'appid',
   masterKey: process.env.MASTER_KEY || 'masterid', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'http://localhost:1337/',  // Don't forget to change to https if needed
+  serverURL: process.env.SERVER_URL || 'https://localhost:1337/',  // Don't forget to change to https if needed
   liveQuery: {
     classNames: ["Beacons","Test"] // List of classes to support for query subscriptions
   }
@@ -46,10 +52,10 @@ app.get('/test', function(req, res) {
 });
 
 var port = process.env.PORT || 1337;
-var httpServer = require('http').createServer(app);
+var httpsServer = require('https').createServer(ssl, app);
 httpServer.listen(port, function() {
-    console.log('parse-server-example running on port ' + port + '.');
+    console.log('parse-server-example running with SSL on port ' + port + '.');
 });
 
 // This will enable the Live Query real-time server
-var parseLiveQueryServer = ParseServer.createLiveQueryServer(httpServer);
+var parseLiveQueryServer = ParseServer.createLiveQueryServer(httpsServer);

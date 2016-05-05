@@ -1,6 +1,6 @@
 {
 	"apps": [{
-		"serverURL": "http://domain:1337/parse",
+		"serverURL": "https://domain:1337/parse",
 		"appId": "appid",
 		"masterKey": "masterid",
 		"appName": "MyApp"

@@ -1,6 +1,6 @@
-# Digital Ocean - Parse Server Setup Automation (Parse Server, Parse Dashboard, MongoDb, SSL license, HTTPS Access, NGINX HTTP Server) 
+# Digital Ocean - Parse Server Setup Automation (Parse Server, Parse Dashboard, MongoDb, SSL license, HTTPS Access, NGINX HTTP Server)
 
-###Parse Server 
+###Parse Server
 - Parse Details: https://parse.com/
 - Parse GitHub: https://parseplatform.github.io/
 
@@ -23,12 +23,11 @@ sh parse-full-server-setup-digitalocean/parse-setup.sh
 ```
 
 ### What you get with this install
-- Parse Server
+- Parse Server (SSL only access)
 - Parse Dashboard
-- Mongo Db
-- NGINX (web server) - Folder to access files /usr/share/nginx/www/"your-domain" 
-- SSL License
-- HTTPS Access
+- Mongo Db (No direct access (Security issue))
+- NGINX (SSL Web Server Only - More secure) - Folder to access files /usr/share/nginx/www/"your-domain"
+- SSL License with HTTPS Access ONLY
 
 You will be asked couple questions along the way. Please answer truthfully :). Once you are through, you will be asked to restart the server. Once restarted, you are all DONE.
 
