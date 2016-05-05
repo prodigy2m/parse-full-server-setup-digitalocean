@@ -23,7 +23,7 @@ echo "------------------------------------------------------------------"
 
 echo -p "Do you have everything you need to start? (y/n)?"
 	read choice
-	
+
 	case $choice in
 		y)
 
@@ -39,7 +39,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			echo "Are you using the CHEAPEST DigitalOcean Plan? (y/n)? "
 				read swap
 				case $swap in
-					y)	
+					y)
 						echo "Creating SWAP memory"
 						sudo fallocate -l 4G /swapfile
 						ls -lh /swapfile
@@ -48,7 +48,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 						sudo mkswap /swapfile
 						sudo swapon /swapfile
 						# check if swap created
-						free -m 
+						free -m
 						echo "Your SWAP Memory was increased. Good luck in next steps"
 					;;
 					n)
@@ -91,13 +91,13 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			sleep 5
 
 			echo "- Installing Parse Server (Example) -"
-			sleep 1			
+			sleep 1
 			git clone https://github.com/ParsePlatform/parse-server-example.git
 			cd /root/parse-server-example/
 			npm install
 
 			echo "- Installing Parse Dashboard -"
-			sleep 1	
+			sleep 1
 			# cd ~/parse-server-example
 			cd ..
 			git clone https://github.com/ParsePlatform/parse-dashboard.git
@@ -105,7 +105,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			npm install -g parse-dashboard
 
 			echo "- Installing Forever and Forever-Service for Running Production -"
-			sleep 1			
+			sleep 1
 			npm install -g forever
 			npm install -g forever-service
 
@@ -126,7 +126,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			echo "You must have DOMAIN name assigned to this server for it to work."
 			echo -p "Do you have DOMAIN name assigned to this server? (y/n)?"
 				read choice
-				
+
 				case $choice in
 				y)
 					echo "Enter your domain name (Without http, or www): "
@@ -136,12 +136,12 @@ echo -p "Do you have everything you need to start? (y/n)?"
 					sed 's/domain/'"$input"'/g' /root/parse-full-server-setup-digitalocean/default_sample > /etc/nginx/sites-available/default
 					echo "Your SSH for nginx is all setup and done."
 					sleep 2
-					
+
 					echo "- Porting NGINX and MongoDb SSL Licence. -"
 					sleep 2
 					# Had to do it this way because dynamic domain didn't work in SH , had to export dynamic name to BASH
 					export domain
-					bash mongoSSL.sh
+					bash ~/parse-full-server-setup-digitalocean/mongoSSL.sh
 
 				;;
 				n)
@@ -155,8 +155,8 @@ echo -p "Do you have everything you need to start? (y/n)?"
 
 
 			echo "- Configuring Autostart for Parse Server & Livequery & Parse Dashboard -"
-			sleep 2			
-			
+			sleep 2
+
 
 			cd ~/parse-server-example
 			sudo forever-service install parse-server --script index.js
@@ -176,7 +176,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 
 			sleep 2
 
-			# Creating new user name and password for Parse Dashboard Login. 
+			# Creating new user name and password for Parse Dashboard Login.
 			echo "############### IMPORTANT  #######################"
 			echo "--- Please create your new User name and Password "
 			echo "--------------------------------------------------"
@@ -192,7 +192,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			sed 's/masterid/'"$NEW_ID_MASTER"'/g; s/appid/'"$NEW_ID_CLIENT"'/g' /root/parse-full-server-setup-digitalocean/parse_app_setup.js > /root/parse-server-example/index.js
 
 			echo "- Creating First MongoDb Entry -"
-			sleep 2			
+			sleep 2
 			curl -X POST \
 				-H "X-Parse-Application-Id: $NEW_ID_CLIENT" \
 				-H "Content-Type: application/json" \
@@ -209,14 +209,14 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			echo " - Parse Server: https://$input/parse"
 			echo " - Parse LiveQuery Server: ws://$input:1337"
 			echo ""
-			echo "$################ GOOD LUCK BUILDING STUFF  ######################"  
+			echo "$################ GOOD LUCK BUILDING STUFF  ######################"
 			echo "------------------------------------------------------------------"
 
 			sleep 5
 
 			echo -p "Do you have everything you need to start? (y/n)?"
 				read restart_this
-	
+
 				case $restart_this in
 					y)
 						echo "Rebooting now";
