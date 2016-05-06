@@ -200,7 +200,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 				https://localhost:1337/parse/classes/GameScore
 
 			echo "------------------------------------------------------------------"
-			echo "$############# IMPORTANT - WRITE THIS DOWN  ######################"
+			echo "############## IMPORTANT - WRITE THIS DOWN  ######################"
 			echo " ---- MASTER KEY (Keep this private): $NEW_ID_MASTER"
 			echo " ---- CLIENT KEY: $NEW_ID_CLIENT"
 			echo ""
@@ -209,7 +209,7 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			echo " - Parse Server: https://$input/parse"
 			echo " - Parse LiveQuery Server: ws://$input:1337"
 			echo ""
-			echo "$################ GOOD LUCK BUILDING STUFF  ######################"
+			echo "################ GOOD LUCK BUILDING STUFF  ######################"
 			echo "------------------------------------------------------------------"
 
 			sleep 5
