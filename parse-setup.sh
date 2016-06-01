@@ -65,6 +65,9 @@ echo -p "Do you have everything you need to start? (y/n)?"
 			sudo -E bash ./nodesource_setup.sh
 			sudo apt-get -y install nodejs build-essential git
 
+			sudo apt-get -y install libkrb5-dev
+
+
 			echo "- Installing Express. -"
 			sleep 1
 			npm install -g express
